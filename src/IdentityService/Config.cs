@@ -49,7 +49,7 @@ public static class Config
                     "profile",
                     "auctionApp"
                 },
-                AccessTokenLifetime = 3600
+                AccessTokenLifetime = 3600*24*30
             }
         };
 }
