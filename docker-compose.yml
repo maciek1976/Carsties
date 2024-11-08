@@ -89,21 +89,35 @@ services:
       - 6001:80
     depends_on:
       - postgres
-  bid-svc: 
+  bid-svc:
     image: malelontko/bid-svc:latest
     build: 
       context: .
       dockerfile: src/BiddingService/Dockerfile
     environment:
-      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URL=http://+:80
       - ASPNETCORE_HTTP_PORTS=80
-      - RabbitMq__Host=rabbitmq 
+      - RabbitMq__Host=rabbitmq
       - ConnectionStrings__BidDbConnection=mongodb://root:mongopw@mongodb
       - IdentityServiceUrl=http://identity-svc
-      - GrpcAuction=http://auction-svc:7777 
-    ports: 
+      - GrpcAuction=http://auction-svc:7777
+    ports:
       - 7003:80
     depends_on:
       - mongodb
+      - rabbitmq
+  notify-svc:
+    image: malelontko/notify-svc:latest
+    build: 
+      context: .
+      dockerfile: src/NotificationService/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_HTTP_PORTS=80
+      - RabbitMq__Host=rabbitmq
+    ports:
+      - 7004:80
+    depends_on:
       - rabbitmq
