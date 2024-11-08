@@ -17,7 +17,7 @@ namespace AuctionService.Consumers
         {
             Console.WriteLine("--> Consuming auction updated");
 
-            var auction = await _dbContext.Auctions.FindAsync(context.Message.Id);
+            var auction = await _dbContext.Auctions.FindAsync(Guid.Parse(context.Message.Id));
         }
     }
 }
