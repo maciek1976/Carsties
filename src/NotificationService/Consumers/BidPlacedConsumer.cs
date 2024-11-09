@@ -4,14 +4,14 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace NotificationService;
 
-public class BidPlacedConsumer : IConsumer<BidPlaced>
+public class BidPlacedConsumer(IHubContext<NotificationHub> hubContext) : IConsumer<BidPlaced>
 {
     private readonly IHubContext<NotificationHub> _hubContext;
 
-    public BidPlacedConsumer(IHubContext<NotificationHub> hubContext)
-    {
-        _hubContext = hubContext;
-    }
+    // public BidPlacedConsumer(IHubContext<NotificationHub> hubContext)
+    // {
+    //     _hubContext = hubContext;
+    // }
 
     public async Task Consume(ConsumeContext<BidPlaced> context)
     {
