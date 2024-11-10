@@ -1,17 +1,13 @@
 'use server'
 
-import { auth } from "@/auth";
-import { fetchWrapper } from "@/lib/fetchWrapper";
+import { fetchWrapper } from "@/app/lib/fetchWrapper";
 import { Auction, Bid, PagedResult } from "@/types";
 import { FieldValues } from "react-hook-form";
 import { revalidatePath } from "next/cache";
+import { auth } from "@/auth";
 
-export async function getData(query: string): Promise<PagedResult<Auction>>{
+export async function getData(query: string): Promise<PagedResult<Auction>> {
     return await fetchWrapper.get(`search${query}`);
-    // if (!res.ok) throw new Error('Failed to fetch data');
-
-    // return res.json();
-    //auctions/afbee524-5972-4075-8800-7d1f9d7b0a0c
 }
 
 export async function updateAuctionTest() {

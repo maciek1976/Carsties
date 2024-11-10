@@ -121,3 +121,21 @@ services:
       - 7004:80
     depends_on:
       - rabbitmq
+  web-app:
+    image: malelontko/web-app
+    build: 
+      context: .
+      dockerfile: frontend/web-app/Dockerfile
+    volumes:
+      - /var/lib/web/data
+    ports:
+      - 3000:3000
+    extra_hosts:
+      - id.carsties.com:10.5.0.200
+    environment:
+      - AUTH_SECRET="ys/lB4ZQuRmXAZ97rHt8BgB+Qcs9+z7sfXR9kp9xw18="
+      - AUTH_URL=http://localhost:3000
+      - AUTH_URL_INTERNAL=HTTP://WEB-APP:3000
+      - API_URL=http://gateway-svc/
+      - ID_URL=http://localhost:5000
+      - NOTIFY_URL=http://localhost:6001/notifications

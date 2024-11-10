@@ -5,7 +5,6 @@ import React, { useEffect } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
 import Input from '../components/Input';
 import DateInput from '../components/DateInput';
-// import { createAuction, updateAuction } from '../actions/auctionActions';
 import { usePathname, useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import { Auction } from '@/types';
@@ -32,7 +31,6 @@ export default function AuctionForm({ auction }: Props) {
     }, [setFocus, reset, auction])
 
     async function onSubmit(data: FieldValues) {
-        console.log(data);
         try {
             let id = '';
             let res;

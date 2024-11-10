@@ -11,17 +11,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             id: 'id-server',
             clientId: "nextApp",
             clientSecret: "secret",
-            issuer: "http://localhost:5000",
+            issuer: process.env.ID_URL,
             authorization: {params: {scope: 'openid profile auctionApp'}},
             idToken: true
-        } as OIDCConfig<Omit<Profile, 'username'>>)
+            } as OIDCConfig<Omit<Profile, 'username'>>),
     ],
     callbacks: {
         async authorized({auth}) {
             return !!auth;
         },
         async jwt({token, user, account, profile}) {
-            console.log({token, user, account, profile});
             if (account && account.access_token) {
                 token.accessToken = account.access_token;
             }          
